@@ -1,0 +1,80 @@
+﻿@model IEnumerable<WebBanHangOnline.Models.EF.Product>
+
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_responsive.css">
+
+
+
+<h3>
+    <br />
+
+    <br /> <br />
+    <br />
+    <br />
+  </h3>
+<div style="text-align">
+@using (Html.BeginForm("TimKiem", "TimKiem", FormMethod.Get))
+{
+    <p>
+        <input type="text" name="strSearch" value="@ViewBag.Search" placeholder="Nhập sản phẩm cần tìm..." size="100" /> <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+</div>
+@{
+    if (Model != null)
+    {
+        <h2> Kết quả tìm: </h2>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PriceSale)
+                </th>
+
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        
+                        <h6 class="product_name"><a href="/chi-tiet/@item.Alias-p@(item.Id)">@item.Title</a></h6>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                       <img src="@item.Image" height="274" width="485">
+                       
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PriceSale)
+                    </td>
+
+
+                </tr>
+            }
+        </table>
+    }
+}
+<style>
+    p {
+        text-align: center;
+    }
+</style>
